@@ -2,25 +2,29 @@ import Adb from '@u4/adbkit';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import Device from '@u4/adbkit/dist/models/Device';
-import {
-  getBeatSaberConfigPath,
-  getPcPlayerData,
-  getQuestPlayerData,
-  getLocalPlayer,
-  isValidBeatSaberConfigPath,
-  isValidBeatSaberGamePath,
-  updatePcPlayerData,
-  updateQuestPlayerData,
-  getQuestPlaylists,
-  getBeatSaberGamePath,
-  getPcPlaylists,
-  removePlaylistFromPc,
-  addPlaylistToQuest,
-  removePlaylistFromQuest,
-  addPlaylistToPc,
-} from './utils';
 import { updateCustomConfigPath, updateCustomGamePath } from './settings';
 import { SyncOption } from './types';
+import {
+  getLocalPlayer,
+  getPcPlayerData,
+  getQuestPlayerData,
+  updatePcPlayerData,
+  updateQuestPlayerData,
+} from './utils/playerData';
+import {
+  addPlaylistToPc,
+  addPlaylistToQuest,
+  getPcPlaylists,
+  getQuestPlaylists,
+  removePlaylistFromPc,
+  removePlaylistFromQuest,
+} from './utils/playlist';
+import {
+  getBeatSaberConfigPath,
+  getBeatSaberGamePath,
+  isValidBeatSaberConfigPath,
+  isValidBeatSaberGamePath,
+} from './utils/pcPaths';
 
 // initialize pc
 let beatSaberConfigPath = getBeatSaberConfigPath();
