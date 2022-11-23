@@ -8,10 +8,18 @@ import {
   getQuestPlayerData,
   getLocalPlayer,
   isValidBeatSaberConfigPath,
+  isValidBeatSaberGamePath,
   updatePcPlayerData,
   updateQuestPlayerData,
+  getQuestPlaylists,
+  getBeatSaberGamePath,
+  getPcPlaylists,
+  removePlaylistFromPc,
+  addPlaylistToQuest,
+  removePlaylistFromQuest,
+  addPlaylistToPc,
 } from './utils';
-import { updateCustomConfigPath } from './settings';
+import { updateCustomConfigPath, updateCustomGamePath } from './settings';
 import { SyncOption } from './types';
 
 // initialize pc
@@ -33,8 +41,27 @@ if (!isValidBeatSaberConfigPath(beatSaberConfigPath)) {
   beatSaberConfigPath = customPath;
   updateCustomConfigPath(customPath);
 }
+let beatSaberGamePath = getBeatSaberGamePath();
+// validate path exists
+if (!isValidBeatSaberGamePath(beatSaberGamePath)) {
+  console.log(chalk.red(`Beat Saber game path ${beatSaberGamePath} does not exist`));
+  // ask for a new path
+  const { customPath } = await inquirer.prompt<{
+    customPath: string;
+  }>([
+    {
+      type: 'input',
+      name: 'customPath',
+      message: 'Please enter the path to your Beat Saber game folder',
+      validate: input => isValidBeatSaberGamePath(input),
+    },
+  ]);
+  beatSaberGamePath = customPath;
+  updateCustomGamePath(customPath);
+}
 
 // initialize adb
+// TODO: check if adb is installed
 const client = Adb.createClient();
 const devices = await client.listDevices();
 
@@ -95,12 +122,16 @@ async function syncQuestAndPc(device: Device) {
   const pcFavorites = pcLocalPlayer.favoritesLevelIds;
 
   // find favorites on quest that are not on pc
-  const onlyOnQuest = questFavorites.filter(id => !pcFavorites.includes(id));
+  const onlyOnQuestFavorites = questFavorites.filter(id => !pcFavorites.includes(id));
   // find favorites on pc that are not on quest
-  const onlyOnPc = pcFavorites.filter(id => !questFavorites.includes(id));
+  const onlyOnPcFavorites = pcFavorites.filter(id => !questFavorites.includes(id));
 
-  if (onlyOnQuest.length) {
-    console.log(chalk.green(`Found ${onlyOnQuest.length} favorites that are on Quest but not on PC`));
+  // TODO: make a selection for each individual item
+
+  if (onlyOnQuestFavorites.length) {
+    console.log(
+      chalk.green(`Found ${onlyOnQuestFavorites.length} favorites that are on Quest but not on PC`)
+    );
     // ask if they want to remove them from quest or add them to pc
     const { action } = await inquirer.prompt<{
       action: SyncOption;
@@ -118,22 +149,25 @@ async function syncQuestAndPc(device: Device) {
             name: 'Remove from Quest',
             value: 'quest',
           },
+          // TODO: add option to do nothing
         ],
       },
     ]);
     if (action === 'pc') {
       // add favorites to pc
-      pcLocalPlayer.favoritesLevelIds = [...pcFavorites, ...onlyOnQuest];
+      pcLocalPlayer.favoritesLevelIds = [...pcFavorites, ...onlyOnQuestFavorites];
       updatePcPlayerData(beatSaberConfigPath, pcPlayerData);
     } else {
       // remove favorites from quest
-      questLocalPlayer.favoritesLevelIds = onlyOnQuest;
+      questLocalPlayer.favoritesLevelIds = onlyOnQuestFavorites;
       await updateQuestPlayerData(sync, questPlayerData);
     }
   }
 
-  if (onlyOnPc.length) {
-    console.log(chalk.green(`Found ${onlyOnPc.length} favorites that are on PC but not on Quest`));
+  if (onlyOnPcFavorites.length) {
+    console.log(
+      chalk.green(`Found ${onlyOnPcFavorites.length} favorites that are on PC but not on Quest`)
+    );
     // ask if they want to add them to quest or remove them from pc
     const { action } = await inquirer.prompt<{
       action: SyncOption;
@@ -151,19 +185,120 @@ async function syncQuestAndPc(device: Device) {
             name: 'Remove from PC',
             value: 'pc',
           },
+          // TODO: add option to do nothing
         ],
       },
     ]);
     if (action === 'quest') {
       // add favorites to quest
-      questLocalPlayer.favoritesLevelIds = [...questFavorites, ...onlyOnPc];
+      questLocalPlayer.favoritesLevelIds = [...questFavorites, ...onlyOnPcFavorites];
       await updateQuestPlayerData(sync, questPlayerData);
     } else {
       // remove favorites from pc
-      pcLocalPlayer.favoritesLevelIds = onlyOnPc;
+      pcLocalPlayer.favoritesLevelIds = onlyOnPcFavorites;
       updatePcPlayerData(beatSaberConfigPath, pcPlayerData);
     }
   }
 
   // TODO: sync more player data?
+
+  // sync playlists
+  const questPlaylists = await getQuestPlaylists(client);
+  const pcPlaylists = getPcPlaylists(beatSaberGamePath);
+
+  // find playlists on quest that are not on pc
+  const onlyOnQuestPlaylists = questPlaylists.filter(
+    playlist =>
+      !pcPlaylists.find(
+        pcPlaylist => pcPlaylist.playlist.playlistTitle === playlist.playlist.playlistTitle
+      )
+  );
+  // find playlists on pc that are not on quest
+  const onlyOnPcPlaylists = pcPlaylists.filter(
+    playlist =>
+      !questPlaylists.find(
+        questPlaylist => questPlaylist.playlist.playlistTitle === playlist.playlist.playlistTitle
+      )
+  );
+
+  if (onlyOnQuestPlaylists.length) {
+    console.log(
+      chalk.green(`Found ${onlyOnQuestPlaylists.length} playlists that are on Quest but not on PC`),
+      onlyOnQuestPlaylists.map(x => x.playlist.playlistTitle)
+    );
+    // ask if they want to remove them from quest or add them to pc
+    const { action } = await inquirer.prompt<{
+      action: SyncOption;
+    }>([
+      {
+        type: 'list',
+        name: 'action',
+        message: 'What would you like to do with these playlists?',
+        choices: [
+          {
+            name: 'Add to PC',
+            value: 'pc',
+          },
+          {
+            name: 'Remove from Quest',
+            value: 'quest',
+          },
+          // TODO: add option to do nothing
+        ],
+      },
+    ]);
+    if (action === 'pc') {
+      // add playlists to pc
+      for (const playlist of onlyOnQuestPlaylists) {
+        addPlaylistToPc(playlist, beatSaberGamePath);
+      }
+    } else {
+      // remove playlists from quest
+      for (const playlist of onlyOnQuestPlaylists) {
+        await removePlaylistFromQuest(playlist, client);
+      }
+    }
+  }
+
+  if (onlyOnPcPlaylists.length) {
+    console.log(
+      chalk.green(
+        `Found ${onlyOnPcPlaylists.length} playlists that are on PC but not on Quest`,
+        onlyOnPcPlaylists.map(x => x.playlist.playlistTitle)
+      )
+    );
+    // ask if they want to add them to quest or remove them from pc
+    const { action } = await inquirer.prompt<{
+      action: SyncOption;
+    }>([
+      {
+        type: 'list',
+        name: 'action',
+        message: 'What would you like to do with these playlists?',
+        choices: [
+          {
+            name: 'Add to Quest',
+            value: 'quest',
+          },
+          {
+            name: 'Remove from PC',
+            value: 'pc',
+          },
+        ],
+      },
+    ]);
+    if (action === 'quest') {
+      // add playlists to quest
+      for (const playlist of onlyOnPcPlaylists) {
+        await addPlaylistToQuest(playlist, client);
+      }
+    } else {
+      // remove playlists from pc
+      for (const playlist of onlyOnPcPlaylists) {
+        removePlaylistFromPc(playlist, beatSaberGamePath);
+      }
+    }
+  }
+
+  sync.end();
 }

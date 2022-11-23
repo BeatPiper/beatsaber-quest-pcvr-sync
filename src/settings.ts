@@ -3,6 +3,7 @@ import path from 'path';
 
 interface Settings {
   customConfigPath?: string;
+  customGamePath?: string;
 }
 
 const settingsPath = `.${path.sep}settings.json`;
@@ -25,5 +26,15 @@ export function getCustomConfigPath(): string | undefined {
 export function updateCustomConfigPath(customConfigPath: string) {
   const settings = getSettings();
   settings.customConfigPath = customConfigPath;
+  updateSettings(settings);
+}
+
+export function getCustomGamePath(): string | undefined {
+  return getSettings().customGamePath;
+}
+
+export function updateCustomGamePath(customGamePath: string) {
+  const settings = getSettings();
+  settings.customGamePath = customGamePath;
   updateSettings(settings);
 }
