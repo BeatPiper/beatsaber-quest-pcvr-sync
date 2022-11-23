@@ -36,7 +36,7 @@ export function getBeatSaberConfigPath(): string {
   if (platform === 'win32') {
     return `${process.env.USERPROFILE}${sep}${relativePath}`;
   } else if (platform === 'linux') {
-    return `${process.env.HOME}${sep}share${sep}Steam/steamapps${sep}compatdata${sep}620980${sep}pfx${sep}drive_c${sep}users${sep}steamuser${sep}${relativePath}`;
+    return `${process.env.HOME}${sep}.local${sep}share${sep}Steam/steamapps${sep}compatdata${sep}620980${sep}pfx${sep}drive_c${sep}users${sep}steamuser${sep}${relativePath}`;
   }
   throw new Error('Unsupported platform');
 }
