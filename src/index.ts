@@ -12,6 +12,7 @@ import {
   updateQuestPlayerData,
 } from './utils';
 import { updateCustomConfigPath } from './settings';
+import { SyncOption } from './types';
 
 // initialize pc
 let beatSaberConfigPath = getBeatSaberConfigPath();
@@ -102,7 +103,7 @@ async function syncQuestAndPc(device: Device) {
     console.log(chalk.green(`Found ${onlyOnQuest.length} favorites that are on Quest but not on PC`));
     // ask if they want to remove them from quest or add them to pc
     const { action } = await inquirer.prompt<{
-      action: 'pc' | 'quest';
+      action: SyncOption;
     }>([
       {
         type: 'list',
@@ -135,7 +136,7 @@ async function syncQuestAndPc(device: Device) {
     console.log(chalk.green(`Found ${onlyOnPc.length} favorites that are on PC but not on Quest`));
     // ask if they want to add them to quest or remove them from pc
     const { action } = await inquirer.prompt<{
-      action: 'pc' | 'quest';
+      action: SyncOption;
     }>([
       {
         type: 'list',
