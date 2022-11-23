@@ -1,0 +1,24 @@
+{
+  "name": "beatsaber-quest-pcvr-sync",
+  "description": "Sync your BeatSaber maps/playlists/favorites between the Quest and PCVR version of the game",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "repository": "D3SOX/beatsaber-quest-pcvr-sync",
+  "author": "D3SOX",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx --watch .",
+    "start": "tsx ."
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.0",
+    "tsx": "^3.12.1",
+    "typescript": "~4.9.3"
+  }
+}

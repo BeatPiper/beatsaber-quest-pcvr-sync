@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "Node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "removeComments": true,
+        "strict": true,
+        "outDir": "./dist"
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "output"
+    ]
+}
