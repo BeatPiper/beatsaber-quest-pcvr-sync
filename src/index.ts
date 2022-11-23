@@ -1,4 +1,4 @@
-import Adb from '@u4/adbkit';
+import Adb, { DeviceClient } from '@u4/adbkit';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import Device from '@u4/adbkit/dist/models/Device';
@@ -109,6 +109,14 @@ async function syncQuestAndPc(device: Device) {
   console.log(chalk.green(`Syncing from ${device.id} to PC...`));
 
   const client = device.getClient();
+  await syncFavorites(client);
+  await syncPlaylists(client);
+}
+
+/**
+ * Bidirectional sync for favorites
+ */
+async function syncFavorites(client: DeviceClient) {
   const sync = await client.syncService();
 
   // get player data from quest and pc
@@ -205,6 +213,13 @@ async function syncQuestAndPc(device: Device) {
   }
 
   // TODO: sync more player data?
+}
+
+/**
+ * Bidirectional sync for playlists
+ */
+async function syncPlaylists(client: DeviceClient) {
+  const sync = await client.syncService();
 
   // sync playlists
   const questPlaylists = await getQuestPlaylists(client);
