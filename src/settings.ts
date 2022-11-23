@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 interface Settings {
-  customPath?: string;
+  customConfigPath?: string;
 }
 
 const settingsPath = `.${path.sep}settings.json`;
@@ -18,12 +18,12 @@ function updateSettings(settings: Settings) {
   fs.writeFileSync(settingsPath, JSON.stringify(settings), 'utf8');
 }
 
-export function getCustomPath(): string | undefined {
-  return getSettings().customPath;
+export function getCustomConfigPath(): string | undefined {
+  return getSettings().customConfigPath;
 }
 
-export function updateCustomPath(customPath: string) {
+export function updateCustomConfigPath(customConfigPath: string) {
   const settings = getSettings();
-  settings.customPath = customPath;
+  settings.customConfigPath = customConfigPath;
   updateSettings(settings);
 }

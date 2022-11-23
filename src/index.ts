@@ -3,21 +3,21 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import Device from '@u4/adbkit/dist/models/Device';
 import {
-  getBeatSaberPath,
+  getBeatSaberConfigPath,
   getPcPlayerData,
   getQuestPlayerData,
   getLocalPlayer,
-  isValidBeatSaberPath,
+  isValidBeatSaberConfigPath,
   updatePcPlayerData,
   updateQuestPlayerData,
 } from './utils';
-import { updateCustomPath } from './settings';
+import { updateCustomConfigPath } from './settings';
 
 // initialize pc
-let beatSaberPath = getBeatSaberPath();
+let beatSaberConfigPath = getBeatSaberConfigPath();
 // validate path exists
-if (!isValidBeatSaberPath(beatSaberPath)) {
-  console.log(chalk.red(`Beat Saber path ${beatSaberPath} does not exist`));
+if (!isValidBeatSaberConfigPath(beatSaberConfigPath)) {
+  console.log(chalk.red(`Beat Saber config path ${beatSaberConfigPath} does not exist`));
   // ask for a new path
   const { customPath } = await inquirer.prompt<{
     customPath: string;
@@ -25,12 +25,12 @@ if (!isValidBeatSaberPath(beatSaberPath)) {
     {
       type: 'input',
       name: 'customPath',
-      message: 'Please enter the path to your Beat Saber folder',
-      validate: input => isValidBeatSaberPath(input),
+      message: 'Please enter the path to your Beat Saber config folder',
+      validate: input => isValidBeatSaberConfigPath(input),
     },
   ]);
-  beatSaberPath = customPath;
-  updateCustomPath(customPath);
+  beatSaberConfigPath = customPath;
+  updateCustomConfigPath(customPath);
 }
 
 // initialize adb
@@ -84,7 +84,7 @@ async function syncQuestAndPc(device: Device) {
   const questPlayerData = await getQuestPlayerData(sync);
   const questLocalPlayer = getLocalPlayer(questPlayerData);
 
-  const pcPlayerData = getPcPlayerData(beatSaberPath);
+  const pcPlayerData = getPcPlayerData(beatSaberConfigPath);
   const pcLocalPlayer = getLocalPlayer(pcPlayerData);
 
   // TODO: make a backup of the player data before syncing and add an option to restore it
@@ -123,7 +123,7 @@ async function syncQuestAndPc(device: Device) {
     if (action === 'pc') {
       // add favorites to pc
       pcLocalPlayer.favoritesLevelIds = [...pcFavorites, ...onlyOnQuest];
-      updatePcPlayerData(beatSaberPath, pcPlayerData);
+      updatePcPlayerData(beatSaberConfigPath, pcPlayerData);
     } else {
       // remove favorites from quest
       questLocalPlayer.favoritesLevelIds = onlyOnQuest;
@@ -160,7 +160,7 @@ async function syncQuestAndPc(device: Device) {
     } else {
       // remove favorites from pc
       pcLocalPlayer.favoritesLevelIds = onlyOnPc;
-      updatePcPlayerData(beatSaberPath, pcPlayerData);
+      updatePcPlayerData(beatSaberConfigPath, pcPlayerData);
     }
   }
 

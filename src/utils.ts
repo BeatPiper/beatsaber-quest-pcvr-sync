@@ -6,7 +6,7 @@ import { PLAYERDATA_FILE, PLAYERDATA_PATH_QUEST } from './constants';
 import { LocalPlayer, PlayerData } from './types/playerData';
 import chalk from 'chalk';
 import { Sync } from '@u4/adbkit';
-import { getCustomPath } from './settings';
+import { getCustomConfigPath } from './settings';
 
 function streamToString(stream: Stream): Promise<string> {
   const chunks: Buffer[] = [];
@@ -24,10 +24,10 @@ function stringToStream(input: string): Stream.Readable {
   return stream;
 }
 
-export function getBeatSaberPath(): string {
-  const customPath = getCustomPath();
-  if (customPath) {
-    return customPath;
+export function getBeatSaberConfigPath(): string {
+  const customConfigPath = getCustomConfigPath();
+  if (customConfigPath) {
+    return customConfigPath;
   }
 
   const { sep } = path;
@@ -43,17 +43,17 @@ export function getBeatSaberPath(): string {
 
 const playerDataPath = (gamePath: string) => `${gamePath}${path.sep}${PLAYERDATA_FILE}`;
 
-export function isValidBeatSaberPath(gamePath: string): boolean {
-  return fs.existsSync(playerDataPath(gamePath));
+export function isValidBeatSaberConfigPath(configPath: string): boolean {
+  return fs.existsSync(playerDataPath(configPath));
 }
 
-export function getPcPlayerData(gamePath: string): PlayerData {
-  const data = fs.readFileSync(playerDataPath(gamePath), 'utf8');
+export function getPcPlayerData(configPath: string): PlayerData {
+  const data = fs.readFileSync(playerDataPath(configPath), 'utf8');
   return JSON.parse(data.trim());
 }
 
-export function updatePcPlayerData(gamePath: string, playerData: PlayerData) {
-  fs.writeFileSync(playerDataPath(gamePath), JSON.stringify(playerData), 'utf8');
+export function updatePcPlayerData(configPath: string, playerData: PlayerData) {
+  fs.writeFileSync(playerDataPath(configPath), JSON.stringify(playerData), 'utf8');
 }
 
 export async function getQuestPlayerData(sync: Sync): Promise<PlayerData> {
