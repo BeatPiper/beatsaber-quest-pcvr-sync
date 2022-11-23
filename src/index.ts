@@ -212,6 +212,7 @@ async function syncFavorites(client: DeviceClient) {
     }
   }
 
+  sync.end();
   // TODO: sync more player data?
 }
 
