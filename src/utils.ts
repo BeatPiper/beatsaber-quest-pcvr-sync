@@ -3,7 +3,7 @@ import os from 'os';
 import path from 'path';
 import fs from 'fs';
 import { PLAYERDATA_FILE, PLAYERDATA_PATH_QUEST } from './constants';
-import { LocalPlayer, PlayerData } from './types';
+import { LocalPlayer, PlayerData } from './types/playerData';
 import chalk from 'chalk';
 import { Sync } from '@u4/adbkit';
 import { getCustomPath } from './settings';
