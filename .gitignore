@@ -1,5 +1,11 @@
+# IDE
 .idea
+# Node
 yarn-error.log
 .DS_Store
 node_modules
 dist
+# Local settings file
+settings.json
+# Player data files for local development
+PlayerData*.dat
