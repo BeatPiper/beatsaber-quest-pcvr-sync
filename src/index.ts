@@ -108,6 +108,11 @@ async function chooseDevice() {
 async function syncQuestAndPc(device: Device) {
   console.log(chalk.green(`Syncing from ${device.id} to PC...`));
 
+  if (device.type !== 'device') {
+    console.log(chalk.red('Device is not authorized, please authorize it in the headset'));
+    process.exit(1);
+  }
+
   const client = device.getClient();
   await syncFavorites(client);
   await syncPlaylists(client);
