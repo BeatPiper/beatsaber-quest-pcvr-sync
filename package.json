@@ -9,7 +9,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsx --watch .",
-    "start": "tsx ."
+    "start": "tsx .",
+    "lint": "eslint --ignore-path .gitignore --ext .ts src"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.3",
