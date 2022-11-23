@@ -48,7 +48,8 @@ export function isValidBeatSaberPath(gamePath: string): boolean {
 }
 
 export function getPcPlayerData(gamePath: string): PlayerData {
-  return JSON.parse(fs.readFileSync(playerDataPath(gamePath), 'utf8'));
+  const data = fs.readFileSync(playerDataPath(gamePath), 'utf8');
+  return JSON.parse(data.trim());
 }
 
 export function updatePcPlayerData(gamePath: string, playerData: PlayerData) {
@@ -58,7 +59,7 @@ export function updatePcPlayerData(gamePath: string, playerData: PlayerData) {
 export async function getQuestPlayerData(sync: Sync): Promise<PlayerData> {
   const favorites = await sync.pull(PLAYERDATA_PATH_QUEST);
   const data = await streamToString(favorites);
-  return JSON.parse(data);
+  return JSON.parse(data.trim());
 }
 
 export async function updateQuestPlayerData(sync: Sync, playerData: PlayerData) {
