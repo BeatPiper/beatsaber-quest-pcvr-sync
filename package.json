@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@u4/adbkit": "^4.1.17",
-    "chalk": "^5.1.2",
+    "chalk": "^5.2.0",
     "inquirer": "^9.1.4"
   }
 }
