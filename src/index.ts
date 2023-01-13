@@ -25,6 +25,7 @@ import {
   isValidBeatSaberConfigPath,
   isValidBeatSaberGamePath,
 } from './utils/pcPaths';
+import { isSamePlaylist } from './utils/comparator';
 
 // initialize pc
 let beatSaberConfigPath = getBeatSaberConfigPath();
@@ -233,17 +234,11 @@ async function syncPlaylists(client: DeviceClient) {
 
   // find playlists on quest that are not on pc
   const onlyOnQuestPlaylists = questPlaylists.filter(
-    playlist =>
-      !pcPlaylists.find(
-        pcPlaylist => pcPlaylist.playlist.playlistTitle === playlist.playlist.playlistTitle
-      )
+    playlist => !pcPlaylists.find(pcPlaylist => isSamePlaylist(pcPlaylist, playlist))
   );
   // find playlists on pc that are not on quest
   const onlyOnPcPlaylists = pcPlaylists.filter(
-    playlist =>
-      !questPlaylists.find(
-        questPlaylist => questPlaylist.playlist.playlistTitle === playlist.playlist.playlistTitle
-      )
+    playlist => !questPlaylists.find(questPlaylist => isSamePlaylist(questPlaylist, playlist))
   );
 
   if (onlyOnQuestPlaylists.length) {
