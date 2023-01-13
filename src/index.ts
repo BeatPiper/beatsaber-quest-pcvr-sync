@@ -106,7 +106,7 @@ async function chooseDevice() {
  * Bidirectional sync between Quest and PC
  */
 async function syncQuestAndPc(device: Device) {
-  console.log(chalk.green(`Syncing from ${device.id} to PC...`));
+  console.log(chalk.green(`Syncing between ${device.id} and PC...`));
 
   if (device.type !== 'device') {
     console.log(chalk.red('Device is not authorized, please authorize it in the headset'));
