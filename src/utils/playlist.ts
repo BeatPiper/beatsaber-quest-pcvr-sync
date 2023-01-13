@@ -12,9 +12,11 @@ export function getPcPlaylists(gamePath: string): BeatSaberPlaylistFile[] {
   if (!fs.existsSync(playlistsPath)) {
     return [];
   }
-  const files = fs.readdirSync(playlistsPath);
-  const playlists = files.filter(file => file.endsWith('.bplist'));
-  return playlists.map(file => {
+  const files = fs.readdirSync(playlistsPath, { withFileTypes: true });
+  const playlistFiles = files
+    .filter(item => item.isFile() && item.name.endsWith('.bplist'))
+    .map(({ name }) => name);
+  return playlistFiles.map(file => {
     const data = fs.readFileSync(`${playlistsPath}${path.sep}${file}`, 'utf8');
     return {
       fileName: file,
@@ -48,9 +50,9 @@ export function removePlaylistFromPc(playlist: BeatSaberPlaylistFile, gamePath: 
 export async function getQuestPlaylists(client: DeviceClient): Promise<BeatSaberPlaylistFile[]> {
   const files = await client.readdir(PLAYLISTS_PATH_QUEST);
 
-  const playlists = files.filter(({ name }) => name.endsWith('.json'));
+  const playlistFiles = files.filter(item => item.isFile() && item.name.endsWith('.json'));
   return Promise.all(
-    playlists.map(({ name }) => {
+    playlistFiles.map(({ name }) => {
       return getQuestPlaylist(client, name);
     })
   );
