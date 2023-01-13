@@ -10,7 +10,7 @@ import {
   getQuestPlayerData,
   updatePcPlayerData,
   updateQuestPlayerData,
-} from './utils/playerData';
+} from './sync/playerData';
 import {
   addPlaylistToPc,
   addPlaylistToQuest,
@@ -18,7 +18,7 @@ import {
   getQuestPlaylists,
   removePlaylistFromPc,
   removePlaylistFromQuest,
-} from './utils/playlist';
+} from './sync/playlist';
 import {
   getBeatSaberConfigPath,
   getBeatSaberGamePath,
@@ -32,7 +32,7 @@ import {
   getQuestSongs,
   removeSongFromPc,
   removeSongFromQuest,
-} from './utils/song';
+} from './sync/song';
 import { isSamePlaylist, isSameSong } from './utils/comparator';
 
 // initialize pc

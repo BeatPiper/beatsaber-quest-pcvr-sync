@@ -3,8 +3,8 @@ import { LocalPlayer, PlayerData } from '../types/playerData';
 import { PLAYERDATA_PATH_QUEST } from '../constants';
 import fs from 'fs';
 import chalk from 'chalk';
-import { streamToString, stringToStream } from './streams';
-import { getPlayerDataPath } from './pcPaths';
+import { streamToString, stringToStream } from '../utils/streams';
+import { getPlayerDataPath } from '../utils/pcPaths';
 
 export function getPcPlayerData(configPath: string): PlayerData {
   const data = fs.readFileSync(getPlayerDataPath(configPath), 'utf8');

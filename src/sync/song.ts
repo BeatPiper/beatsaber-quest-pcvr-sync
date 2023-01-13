@@ -2,12 +2,12 @@ import path from 'path';
 import fs from 'fs';
 import { DeviceClient } from '@u4/adbkit';
 import { SONGS_PATH_QUEST } from '../constants';
-import { streamToString, streamToWriteStream } from './streams';
+import { streamToString, streamToWriteStream } from '../utils/streams';
 import { SongFile } from '../types/beatSaber';
-import { getSongsPath } from './pcPaths';
+import { getSongsPath } from '../utils/pcPaths';
 import tar from 'tar';
 import crypto from 'crypto';
-import { sleep } from './index';
+import { sleep } from '../utils';
 import os from 'os';
 
 const getSongFiles = (items: fs.Dirent[]) =>

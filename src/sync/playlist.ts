@@ -3,9 +3,9 @@ import path from 'path';
 import fs from 'fs';
 import { DeviceClient } from '@u4/adbkit';
 import { PLAYLISTS_PATH_QUEST } from '../constants';
-import { changeExtensionToBplist, changeExtensionToJson } from './index';
-import { streamToString, stringToStream } from './streams';
-import { getPlaylistsPath } from './pcPaths';
+import { changeExtensionToBplist, changeExtensionToJson } from '../utils';
+import { streamToString, stringToStream } from '../utils/streams';
+import { getPlaylistsPath } from '../utils/pcPaths';
 
 export function getPcPlaylists(gamePath: string): BeatSaberPlaylistFile[] {
   const playlistsPath = getPlaylistsPath(gamePath);
