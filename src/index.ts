@@ -25,7 +25,15 @@ import {
   isValidBeatSaberConfigPath,
   isValidBeatSaberGamePath,
 } from './utils/pcPaths';
-import { isSamePlaylist } from './utils/comparator';
+import {
+  addSongToPc,
+  addSongToQuest,
+  getPcSongs,
+  getQuestSongs,
+  removeSongFromPc,
+  removeSongFromQuest,
+} from './utils/song';
+import { isSamePlaylist, isSameSong } from './utils/comparator';
 
 // initialize pc
 let beatSaberConfigPath = getBeatSaberConfigPath();
@@ -117,6 +125,7 @@ async function syncQuestAndPc(device: Device) {
   const client = device.getClient();
   await syncFavorites(client);
   await syncPlaylists(client);
+  await syncSongs(client);
 }
 
 /**
@@ -321,4 +330,96 @@ async function syncPlaylists(client: DeviceClient) {
   }
 
   sync.end();
+}
+
+/**
+ * Bidirectional sync for songs
+ */
+async function syncSongs(client: DeviceClient) {
+  // sync songs
+  const questSongs = await getQuestSongs(client);
+  const pcSongs = getPcSongs(beatSaberGamePath);
+
+  // find songs on quest that are not on pc
+  const onlyOnQuestSongs = questSongs.filter(song => !pcSongs.find(pcSong => isSameSong(pcSong, song)));
+  // find songs on pc that are not on quest
+  const onlyOnPcSongs = pcSongs.filter(
+    song => !questSongs.find(questSong => isSameSong(questSong, song))
+  );
+
+  if (onlyOnQuestSongs.length) {
+    console.log(
+      chalk.green(`Found ${onlyOnQuestSongs.length} songs that are on Quest but not on PC`),
+      onlyOnQuestSongs.map(x => x.song._songName)
+    );
+    // ask if they want to remove them from quest or add them to pc
+    const { action } = await inquirer.prompt<{
+      action: SyncOption;
+    }>([
+      {
+        type: 'list',
+        name: 'action',
+        message: 'What would you like to do with these songs?',
+        choices: [
+          {
+            name: 'Add to PC',
+            value: 'pc',
+          },
+          {
+            name: 'Remove from Quest',
+            value: 'quest',
+          },
+        ],
+      },
+    ]);
+    if (action === 'pc') {
+      // add songs to pc
+      for (const song of onlyOnQuestSongs) {
+        await addSongToPc(song, client, beatSaberGamePath);
+      }
+    } else {
+      // remove songs from quest
+      for (const song of onlyOnQuestSongs) {
+        await removeSongFromQuest(song, client);
+      }
+    }
+  }
+
+  if (onlyOnPcSongs.length) {
+    console.log(
+      chalk.green(`Found ${onlyOnPcSongs.length} songs that are on PC but not on Quest`),
+      onlyOnPcSongs.map(x => x.song._songName)
+    );
+    // ask if they want to add them to quest or remove them from pc
+    const { action } = await inquirer.prompt<{
+      action: SyncOption;
+    }>([
+      {
+        type: 'list',
+        name: 'action',
+        message: 'What would you like to do with these songs?',
+        choices: [
+          {
+            name: 'Add to Quest',
+            value: 'quest',
+          },
+          {
+            name: 'Remove from PC',
+            value: 'pc',
+          },
+        ],
+      },
+    ]);
+    if (action === 'quest') {
+      // add songs to quest
+      for (const song of onlyOnPcSongs) {
+        await addSongToQuest(song, client, beatSaberGamePath);
+      }
+    } else {
+      // remove songs from pc
+      for (const song of onlyOnPcSongs) {
+        removeSongFromPc(song, beatSaberGamePath);
+      }
+    }
+  }
 }

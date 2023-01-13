@@ -50,3 +50,5 @@ export function isValidBeatSaberGamePath(gamePath: string): boolean {
 
 export const getPlayerDataPath = (configPath: string) => `${configPath}${path.sep}${PLAYERDATA_FILE}`;
 export const getPlaylistsPath = (gamePath: string) => `${gamePath}${path.sep}Playlists`;
+export const getSongsPath = (gamePath: string) =>
+  `${gamePath}${path.sep}Beat Saber_Data${path.sep}CustomLevels`;

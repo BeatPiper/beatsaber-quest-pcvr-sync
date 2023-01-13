@@ -1,4 +1,5 @@
 import Stream from 'stream';
+import { WriteStream } from 'fs';
 
 export function streamToString(stream: Stream): Promise<string> {
   const chunks: Buffer[] = [];
@@ -14,4 +15,12 @@ export function stringToStream(input: string): Stream.Readable {
   stream.push(input);
   stream.push(null);
   return stream;
+}
+
+export function streamToWriteStream(stream: Stream, writeStream: WriteStream) {
+  stream.pipe(writeStream);
+  return new Promise((resolve, reject) => {
+    writeStream.on('finish', resolve);
+    writeStream.on('error', reject);
+  });
 }

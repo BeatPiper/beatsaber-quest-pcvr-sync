@@ -4,3 +4,4 @@ export const PLAYERDATA_PATH_QUEST = `/sdcard/Android/data/com.beatgames.beatsab
 // export const PLAYLISTS_PATH_QUEST = '/sdcard/BMBFData/Playlists/';
 export const PLAYLISTS_PATH_QUEST =
   '/sdcard/ModData/com.beatgames.beatsaber/Mods/PlaylistManager/Playlists/';
+export const SONGS_PATH_QUEST = '/sdcard/ModData/com.beatgames.beatsaber/Mods/SongLoader/CustomLevels/';
