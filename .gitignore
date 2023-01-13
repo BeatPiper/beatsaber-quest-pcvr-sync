@@ -7,5 +7,7 @@ node_modules
 dist
 # Local settings file
 settings.json
-# Player data files for local development
+# Player data backup for local development
 PlayerData*.dat
+# Playlists backup for local development
+Playlists-*/
