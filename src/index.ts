@@ -123,9 +123,13 @@ async function syncQuestAndPc(device: Device) {
   }
 
   const client = device.getClient();
+  console.log(chalk.blue('Now syncing favorites...'));
   await syncFavorites(client);
+  console.log(chalk.blue('Now syncing playlists...'));
   await syncPlaylists(client);
+  console.log(chalk.blue('Now syncing songs...'));
   await syncSongs(client);
+  console.log(chalk.yellow('Sync complete!'));
 }
 
 /**
