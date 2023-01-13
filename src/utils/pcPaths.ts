@@ -2,7 +2,7 @@ import { getCustomConfigPath, getCustomGamePath } from '../settings';
 import path from 'path';
 import os from 'os';
 import fs from 'fs';
-import { playerDataPath } from './index';
+import { PLAYERDATA_FILE } from '../constants';
 
 export function getBeatSaberConfigPath(): string {
   const customConfigPath = getCustomConfigPath();
@@ -23,7 +23,7 @@ export function getBeatSaberConfigPath(): string {
 }
 
 export function isValidBeatSaberConfigPath(configPath: string): boolean {
-  return fs.existsSync(playerDataPath(configPath));
+  return fs.existsSync(getPlayerDataPath(configPath));
 }
 
 export function getBeatSaberGamePath(): string {
@@ -47,3 +47,6 @@ export function getBeatSaberGamePath(): string {
 export function isValidBeatSaberGamePath(gamePath: string): boolean {
   return fs.existsSync(`${gamePath}${path.sep}Beat Saber.exe`);
 }
+
+export const getPlayerDataPath = (configPath: string) => `${configPath}${path.sep}${PLAYERDATA_FILE}`;
+export const getPlaylistsPath = (gamePath: string) => `${gamePath}${path.sep}Playlists`;

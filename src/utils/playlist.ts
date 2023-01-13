@@ -5,9 +5,10 @@ import { DeviceClient } from '@u4/adbkit';
 import { PLAYLISTS_PATH_QUEST } from '../constants';
 import { changeExtensionToBplist, changeExtensionToJson } from './index';
 import { streamToString, stringToStream } from './streams';
+import { getPlaylistsPath } from './pcPaths';
 
 export function getPcPlaylists(gamePath: string): BeatSaberPlaylistFile[] {
-  const playlistsPath = `${gamePath}${path.sep}Playlists`;
+  const playlistsPath = getPlaylistsPath(gamePath);
   if (!fs.existsSync(playlistsPath)) {
     return [];
   }
@@ -23,7 +24,7 @@ export function getPcPlaylists(gamePath: string): BeatSaberPlaylistFile[] {
 }
 
 export function addPlaylistToPc(playlist: BeatSaberPlaylistFile, gamePath: string) {
-  const playlistsPath = `${gamePath}${path.sep}Playlists`;
+  const playlistsPath = getPlaylistsPath(gamePath);
   if (!fs.existsSync(playlistsPath)) {
     fs.mkdirSync(playlistsPath);
   }
@@ -35,7 +36,7 @@ export function addPlaylistToPc(playlist: BeatSaberPlaylistFile, gamePath: strin
 }
 
 export function removePlaylistFromPc(playlist: BeatSaberPlaylistFile, gamePath: string) {
-  const playlistPath = `${gamePath}${path.sep}Playlists${path.sep}${changeExtensionToBplist(
+  const playlistPath = `${getPlaylistsPath(gamePath)}${path.sep}${changeExtensionToBplist(
     playlist.fileName
   )}`;
   if (!fs.existsSync(playlistPath)) {

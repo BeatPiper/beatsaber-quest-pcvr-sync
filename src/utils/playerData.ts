@@ -3,16 +3,16 @@ import { LocalPlayer, PlayerData } from '../types/playerData';
 import { PLAYERDATA_PATH_QUEST } from '../constants';
 import fs from 'fs';
 import chalk from 'chalk';
-import { playerDataPath } from './index';
 import { streamToString, stringToStream } from './streams';
+import { getPlayerDataPath } from './pcPaths';
 
 export function getPcPlayerData(configPath: string): PlayerData {
-  const data = fs.readFileSync(playerDataPath(configPath), 'utf8');
+  const data = fs.readFileSync(getPlayerDataPath(configPath), 'utf8');
   return JSON.parse(data.trim());
 }
 
 export function updatePcPlayerData(configPath: string, playerData: PlayerData) {
-  fs.writeFileSync(playerDataPath(configPath), JSON.stringify(playerData), 'utf8');
+  fs.writeFileSync(getPlayerDataPath(configPath), JSON.stringify(playerData), 'utf8');
 }
 
 export async function getQuestPlayerData(sync: Sync): Promise<PlayerData> {
