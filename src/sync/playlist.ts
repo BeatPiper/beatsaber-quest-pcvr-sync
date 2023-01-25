@@ -78,5 +78,5 @@ export async function addPlaylistToQuest(playlist: BeatSaberPlaylistFile, client
 }
 
 export async function removePlaylistFromQuest(playlist: BeatSaberPlaylistFile, client: DeviceClient) {
-  await client.shell(`rm -rf '${PLAYLISTS_PATH_QUEST}${changeExtensionToJson(playlist.fileName)}'`);
+  await client.exec(`rm -rf '${PLAYLISTS_PATH_QUEST}${changeExtensionToJson(playlist.fileName)}'`);
 }
