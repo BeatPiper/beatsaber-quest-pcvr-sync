@@ -103,7 +103,7 @@ async function getQuestSong(client: DeviceClient, folderName: string): Promise<S
     return null;
   }
 
-  const song = await client.pull(`${songFolder}${path.sep}${infoFile}`);
+  const song = await client.pull(`${songFolder}/${infoFile}`);
   const data = await streamToString(song);
   return {
     folderName,
