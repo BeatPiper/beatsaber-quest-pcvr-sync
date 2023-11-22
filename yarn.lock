@@ -282,10 +282,10 @@
   resolved "https://registry.npmjs.org/@types/semver/-/semver-7.3.13.tgz"
   integrity sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==
 
-"@types/tar@^6.1.9":
-  version "6.1.9"
-  resolved "https://registry.yarnpkg.com/@types/tar/-/tar-6.1.9.tgz#1f8f7033494224e61b97895070fafcdd6ec370f3"
-  integrity sha512-T3+O+OQd9cdGmOXuKQY9+B0ceZHRlGVPQ7M5QZqkaPyP/vWnxPXM2aCegq8GP/n1n9dBfq2EBUqCSKKjQAVOPA==
+"@types/tar@^6.1.10":
+  version "6.1.10"
+  resolved "https://registry.yarnpkg.com/@types/tar/-/tar-6.1.10.tgz#10b0e12129f4af5909af82a055837116ab06f860"
+  integrity sha512-60ZO+W0tRKJ3ggdzJKp75xKVlNogKYMqGvr2bMH/+k3T0BagfYTnbmVDFMJB1BFttz6yRgP5MDGP27eh7brrqw==
   dependencies:
     "@types/node" "*"
     minipass "^4.0.0"
