@@ -1,6 +1,6 @@
-import { Sync } from '@u4/adbkit';
+import { DeviceClient, Sync } from '@u4/adbkit';
 import { LocalPlayer, PlayerData } from '../types/playerData';
-import { PLAYERDATA_PATH_QUEST } from '../constants';
+import { PLAYERDATA_PATH_QUEST, SONGS_PATH_QUEST, TEMP_PLAYERDATA_PATH_QUEST } from '../constants';
 import fs from 'fs';
 import chalk from 'chalk';
 import { streamToString, stringToStream } from '../utils/streams';
@@ -21,9 +21,10 @@ export async function getQuestPlayerData(sync: Sync): Promise<PlayerData> {
   return JSON.parse(data.trim());
 }
 
-export async function updateQuestPlayerData(sync: Sync, playerData: PlayerData) {
+export async function updateQuestPlayerData(sync: Sync, playerData: PlayerData, client: DeviceClient) {
   const data = stringToStream(JSON.stringify(playerData));
   await sync.push(data, PLAYERDATA_PATH_QUEST);
+  await client.exec(`rm -rf '${TEMP_PLAYERDATA_PATH_QUEST}'`);
 }
 
 export function getLocalPlayer(playerData: PlayerData): LocalPlayer {

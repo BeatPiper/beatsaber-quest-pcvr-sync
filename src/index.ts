@@ -191,7 +191,7 @@ async function syncFavorites(client: DeviceClient) {
     } else {
       // remove favorites from quest
       questLocalPlayer.favoritesLevelIds = onlyOnQuestFavorites;
-      await updateQuestPlayerData(sync, questPlayerData);
+      await updateQuestPlayerData(sync, questPlayerData, client);
     }
   }
 
@@ -223,7 +223,7 @@ async function syncFavorites(client: DeviceClient) {
     if (action === 'quest') {
       // add favorites to quest
       questLocalPlayer.favoritesLevelIds = [...questFavorites, ...onlyOnPcFavorites];
-      await updateQuestPlayerData(sync, questPlayerData);
+      await updateQuestPlayerData(sync, questPlayerData, client);
     } else {
       // remove favorites from pc
       pcLocalPlayer.favoritesLevelIds = onlyOnPcFavorites;
