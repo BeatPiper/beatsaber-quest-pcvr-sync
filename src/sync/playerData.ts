@@ -21,7 +21,7 @@ export async function getQuestPlayerData(sync: Sync): Promise<PlayerData> {
   return JSON.parse(data.trim());
 }
 
-export async function updateQuestPlayerData(sync: Sync, playerData: PlayerData, client: DeviceClient) {
+export async function updateQuestPlayerData(sync: Sync, playerData: PlayerData) {
   const data = stringToStream(JSON.stringify(playerData));
   await sync.push(data, PLAYERDATA_PATH_QUEST);
 }
