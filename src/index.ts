@@ -5,6 +5,7 @@ import Device from '@u4/adbkit/dist/models/Device';
 import { updateCustomConfigPath, updateCustomGamePath } from './settings';
 import { SyncOption } from './types';
 import {
+  cleanupDataKeeperCache,
   getLocalPlayer,
   getPcPlayerData,
   getQuestPlayerData,
@@ -129,6 +130,8 @@ async function syncQuestAndPc(device: Device) {
   await syncPlaylists(client);
   console.log(chalk.blue('Now syncing songs...'));
   await syncSongs(client);
+  console.log(chalk.blue('Cleaning up DataKeeper to prevent crashes'));
+  await cleanupDataKeeperCache(client);
   console.log(chalk.yellow('Sync complete!'));
 }
 
