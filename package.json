@@ -22,7 +22,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8",
     "tsx": "^4.7.0",
-    "typescript": "~5.3.3"
+    "typescript": "~5.4.2"
   },
   "dependencies": {
     "@u4/adbkit": "^4.1.19",
