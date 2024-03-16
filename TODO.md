@@ -1,5 +1,5 @@
 - Bidirectional sync of songs inside playlists
 - Progress Bar
-- Do nothing option
+- Select what to do with individual songs/playlist/favorites...
 - Local web UI using Mantine
 - Also sync `CustomMultiplayerLevels` folder

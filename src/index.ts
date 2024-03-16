@@ -160,8 +160,6 @@ async function syncFavorites(client: DeviceClient) {
   // find favorites on pc that are not on quest
   const onlyOnPcFavorites = pcFavorites.filter(id => !questFavorites.includes(id));
 
-  // TODO: make a selection for each individual item
-
   if (onlyOnQuestFavorites.length) {
     console.log(
       chalk.green(`Found ${onlyOnQuestFavorites.length} favorites that are on Quest but not on PC`)
@@ -183,7 +181,10 @@ async function syncFavorites(client: DeviceClient) {
             name: 'Remove from Quest',
             value: 'quest',
           },
-          // TODO: add option to do nothing
+          {
+            name: 'Do nothing',
+            value: null,
+          },
         ],
       },
     ]);
@@ -191,7 +192,7 @@ async function syncFavorites(client: DeviceClient) {
       // add favorites to pc
       pcLocalPlayer.favoritesLevelIds = [...pcFavorites, ...onlyOnQuestFavorites];
       updatePcPlayerData(beatSaberConfigPath, pcPlayerData);
-    } else {
+    } else if (action === 'quest') {
       // remove favorites from quest
       questLocalPlayer.favoritesLevelIds = onlyOnQuestFavorites;
       await updateQuestPlayerData(sync, questPlayerData);
@@ -219,7 +220,10 @@ async function syncFavorites(client: DeviceClient) {
             name: 'Remove from PC',
             value: 'pc',
           },
-          // TODO: add option to do nothing
+          {
+            name: 'Do nothing',
+            value: null,
+          },
         ],
       },
     ]);
@@ -227,7 +231,7 @@ async function syncFavorites(client: DeviceClient) {
       // add favorites to quest
       questLocalPlayer.favoritesLevelIds = [...questFavorites, ...onlyOnPcFavorites];
       await updateQuestPlayerData(sync, questPlayerData);
-    } else {
+    } else if (action === 'pc') {
       // remove favorites from pc
       pcLocalPlayer.favoritesLevelIds = onlyOnPcFavorites;
       updatePcPlayerData(beatSaberConfigPath, pcPlayerData);
@@ -279,7 +283,10 @@ async function syncPlaylists(client: DeviceClient) {
             name: 'Remove from Quest',
             value: 'quest',
           },
-          // TODO: add option to do nothing
+          {
+            name: 'Do nothing',
+            value: null,
+          },
         ],
       },
     ]);
@@ -288,7 +295,7 @@ async function syncPlaylists(client: DeviceClient) {
       for (const playlist of onlyOnQuestPlaylists) {
         addPlaylistToPc(playlist, beatSaberGamePath);
       }
-    } else {
+    } else if (action === 'quest') {
       // remove playlists from quest
       for (const playlist of onlyOnQuestPlaylists) {
         await removePlaylistFromQuest(playlist, client);

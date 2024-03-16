@@ -1,1 +1,1 @@
-export type SyncOption = 'pc' | 'quest';
+export type SyncOption = 'pc' | 'quest' | null;
