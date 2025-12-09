@@ -13,20 +13,20 @@
     "lint": "eslint --ignore-path .gitignore --ext .ts src"
   },
   "devDependencies": {
-    "@types/inquirer": "^9.0.7",
+    "@types/inquirer": "^9.0.9",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^4.2.5",
     "prettier": "^2.8.8",
-    "tsx": "^4.19.2",
+    "tsx": "^4.21.0",
     "typescript": "~5.7.3"
   },
   "dependencies": {
     "@u4/adbkit": "^4.1.20",
-    "chalk": "^5.4.1",
+    "chalk": "^5.6.2",
     "inquirer": "^10.2.2",
-    "tar": "^7.4.3"
+    "tar": "^7.5.2"
   }
 }

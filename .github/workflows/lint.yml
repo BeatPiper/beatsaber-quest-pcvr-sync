@@ -18,16 +18,16 @@ jobs:
 
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup node env 🏗
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install dependencies 👨🏻‍💻
-        run: yarn
+        run: pnpm
 
       - name: Run linter 👀
-        run: yarn lint
+        run: pnpm lint
