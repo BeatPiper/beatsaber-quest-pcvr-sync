@@ -82,7 +82,7 @@ export async function getQuestSongs(client: DeviceClient): Promise<SongFile[]> {
     songFiles.map(async (folder, index) => {
       await sleep(index);
       return getQuestSong(client, folder);
-    })
+    }),
   );
   // const songs = await Promise.all(songFiles.map(folder => getQuestSong(client, folder)));
   return songs.filter(song => song !== null) as SongFile[];
@@ -120,7 +120,7 @@ export async function addSongToQuest(song: SongFile, client: DeviceClient, gameP
       file: tmpPcPath,
       cwd: getSongsPath(gamePath),
     },
-    [song.folderName]
+    [song.folderName],
   );
   // push the archive
   await client.push(tmpPcPath, tmpQuestPath);

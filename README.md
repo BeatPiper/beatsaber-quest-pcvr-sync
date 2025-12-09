@@ -10,9 +10,9 @@ I wanted to be able to sync my maps/playlists/favorites with a click of a button
 ## Usage
 
 1. Clone the repo  
-  `git clone https://github.com/D3SOX/beatsaber-quest-pcvr-sync.git`
+   `git clone https://github.com/D3SOX/beatsaber-quest-pcvr-sync.git`
 2. Install dependencies  
-  `yarn`
+   `yarn`
 3. Start the app  
-  `yarn start`
+   `yarn start`
 4. Follow the instructions

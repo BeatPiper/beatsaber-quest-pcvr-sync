@@ -81,7 +81,7 @@ const devices = await client.listDevices();
 
 if (!devices.length) {
   console.log(
-    chalk.red('No devices found, make sure you have a Quest connected and USB debugging enabled')
+    chalk.red('No devices found, make sure you have a Quest connected and USB debugging enabled'),
   );
   process.exit(1);
 }
@@ -162,7 +162,7 @@ async function syncFavorites(client: DeviceClient) {
 
   if (onlyOnQuestFavorites.length) {
     console.log(
-      chalk.green(`Found ${onlyOnQuestFavorites.length} favorites that are on Quest but not on PC`)
+      chalk.green(`Found ${onlyOnQuestFavorites.length} favorites that are on Quest but not on PC`),
     );
     // ask if they want to remove them from quest or add them to pc
     const { action } = await inquirer.prompt<{
@@ -201,7 +201,7 @@ async function syncFavorites(client: DeviceClient) {
 
   if (onlyOnPcFavorites.length) {
     console.log(
-      chalk.green(`Found ${onlyOnPcFavorites.length} favorites that are on PC but not on Quest`)
+      chalk.green(`Found ${onlyOnPcFavorites.length} favorites that are on PC but not on Quest`),
     );
     // ask if they want to add them to quest or remove them from pc
     const { action } = await inquirer.prompt<{
@@ -254,17 +254,17 @@ async function syncPlaylists(client: DeviceClient) {
 
   // find playlists on quest that are not on pc
   const onlyOnQuestPlaylists = questPlaylists.filter(
-    playlist => !pcPlaylists.find(pcPlaylist => isSamePlaylist(pcPlaylist, playlist))
+    playlist => !pcPlaylists.find(pcPlaylist => isSamePlaylist(pcPlaylist, playlist)),
   );
   // find playlists on pc that are not on quest
   const onlyOnPcPlaylists = pcPlaylists.filter(
-    playlist => !questPlaylists.find(questPlaylist => isSamePlaylist(questPlaylist, playlist))
+    playlist => !questPlaylists.find(questPlaylist => isSamePlaylist(questPlaylist, playlist)),
   );
 
   if (onlyOnQuestPlaylists.length) {
     console.log(
       chalk.green(`Found ${onlyOnQuestPlaylists.length} playlists that are on Quest but not on PC`),
-      onlyOnQuestPlaylists.map(x => x.playlist.playlistTitle)
+      onlyOnQuestPlaylists.map(x => x.playlist.playlistTitle),
     );
     // ask if they want to remove them from quest or add them to pc
     const { action } = await inquirer.prompt<{
@@ -307,8 +307,8 @@ async function syncPlaylists(client: DeviceClient) {
     console.log(
       chalk.green(
         `Found ${onlyOnPcPlaylists.length} playlists that are on PC but not on Quest`,
-        onlyOnPcPlaylists.map(x => x.playlist.playlistTitle)
-      )
+        onlyOnPcPlaylists.map(x => x.playlist.playlistTitle),
+      ),
     );
     // ask if they want to add them to quest or remove them from pc
     const { action } = await inquirer.prompt<{
@@ -358,13 +358,13 @@ async function syncSongs(client: DeviceClient) {
   const onlyOnQuestSongs = questSongs.filter(song => !pcSongs.find(pcSong => isSameSong(pcSong, song)));
   // find songs on pc that are not on quest
   const onlyOnPcSongs = pcSongs.filter(
-    song => !questSongs.find(questSong => isSameSong(questSong, song))
+    song => !questSongs.find(questSong => isSameSong(questSong, song)),
   );
 
   if (onlyOnQuestSongs.length) {
     console.log(
       chalk.green(`Found ${onlyOnQuestSongs.length} songs that are on Quest but not on PC`),
-      onlyOnQuestSongs.map(x => x.song._songName)
+      onlyOnQuestSongs.map(x => x.song._songName),
     );
     // ask if they want to remove them from quest or add them to pc
     const { action } = await inquirer.prompt<{
@@ -402,7 +402,7 @@ async function syncSongs(client: DeviceClient) {
   if (onlyOnPcSongs.length) {
     console.log(
       chalk.green(`Found ${onlyOnPcSongs.length} songs that are on PC but not on Quest`),
-      onlyOnPcSongs.map(x => x.song._songName)
+      onlyOnPcSongs.map(x => x.song._songName),
     );
     // ask if they want to add them to quest or remove them from pc
     const { action } = await inquirer.prompt<{

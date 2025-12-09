@@ -33,13 +33,13 @@ export function addPlaylistToPc(playlist: BeatSaberPlaylistFile, gamePath: strin
   fs.writeFileSync(
     `${playlistsPath}${path.sep}${changeExtensionToBplist(playlist.fileName)}`,
     JSON.stringify(playlist.playlist),
-    'utf8'
+    'utf8',
   );
 }
 
 export function removePlaylistFromPc(playlist: BeatSaberPlaylistFile, gamePath: string) {
   const playlistPath = `${getPlaylistsPath(gamePath)}${path.sep}${changeExtensionToBplist(
-    playlist.fileName
+    playlist.fileName,
   )}`;
   if (!fs.existsSync(playlistPath)) {
     return;
@@ -54,13 +54,13 @@ export async function getQuestPlaylists(client: DeviceClient): Promise<BeatSaber
   return Promise.all(
     playlistFiles.map(({ name }) => {
       return getQuestPlaylist(client, name);
-    })
+    }),
   );
 }
 
 async function getQuestPlaylist(
   client: DeviceClient,
-  playlistFile: string
+  playlistFile: string,
 ): Promise<BeatSaberPlaylistFile> {
   const playlist = await client.pull(`${PLAYLISTS_PATH_QUEST}${playlistFile}`);
   const data = await streamToString(playlist);

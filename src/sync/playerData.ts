@@ -1,4 +1,4 @@
-import { Client, DeviceClient, Sync } from '@u4/adbkit';
+import { DeviceClient, Sync } from '@u4/adbkit';
 import { LocalPlayer, PlayerData } from '../types/playerData';
 import { PLAYERDATA_PATH_QUEST, TEMP_PLAYERDATA_PATH_QUEST } from '../constants';
 import fs from 'fs';

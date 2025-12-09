@@ -1,7 +1,7 @@
 export interface PlayerData {
   version: string;
   localPlayers: LocalPlayer[];
-  guestPlayers: any[]; // TODO: figure out what this is
+  guestPlayers: unknown[]; // TODO: figure out what this is
 }
 
 export interface LocalPlayer {
@@ -102,7 +102,7 @@ export interface MissionsStatsData {
 export interface MultiplayerModeSettings {
   createServerNumberOfPlayers: number;
   quickPlayDifficulty: string;
-  quickPlaySongPackMask: any[]; // TODO: figure out what this is
+  quickPlaySongPackMask: unknown[]; // TODO: figure out what this is
   quickPlaySongPackMaskSerializedName: string;
   quickPlayEnableLevelSelection: boolean;
 }
