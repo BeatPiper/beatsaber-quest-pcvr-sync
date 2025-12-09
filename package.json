@@ -3,7 +3,7 @@
   "description": "Sync your BeatSaber maps/playlists/favorites between the Quest and PCVR version of the game",
   "version": "0.0.1",
   "main": "src/index.ts",
-  "repository": "D3SOX/beatsaber-quest-pcvr-sync",
+  "repository": "BeatPiper/beatsaber-quest-pcvr-sync",
   "author": "D3SOX",
   "license": "GPL-3.0-or-later",
   "engines": {
