@@ -24,7 +24,7 @@
     "typescript": "~5.9.3"
   },
   "dependencies": {
-    "@u4/adbkit": "^4.1.20",
+    "@u4/adbkit": "^5.1.7",
     "chalk": "^5.6.2",
     "inquirer": "^10.2.2",
     "tar": "^7.5.2"
