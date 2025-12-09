@@ -5,7 +5,7 @@ import { SONGS_PATH_QUEST } from '../constants';
 import { streamToString, streamToWriteStream } from '../utils/streams';
 import { SongFile } from '../types/beatSaber';
 import { getSongsPath } from '../utils/pcPaths';
-import tar from 'tar';
+import { extract as extractTar, create as createTar } from 'tar';
 import crypto from 'crypto';
 import { sleep } from '../utils';
 import os from 'os';
@@ -54,7 +54,7 @@ export async function addSongToPc(song: SongFile, client: DeviceClient, gamePath
   await streamToWriteStream(tarFile, fs.createWriteStream(tmpPcPath));
 
   // extract the archive
-  await tar.extract({
+  await extractTar({
     cwd: getSongsPath(gamePath),
     file: tmpPcPath,
   });
@@ -115,7 +115,7 @@ export async function addSongToQuest(song: SongFile, client: DeviceClient, gameP
   const { tmpPcPath, tmpQuestPath } = getTempPaths(song);
 
   // compress the song folder
-  await tar.create(
+  await createTar(
     {
       file: tmpPcPath,
       cwd: getSongsPath(gamePath),

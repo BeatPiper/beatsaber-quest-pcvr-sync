@@ -100,7 +100,7 @@ async function chooseDevice() {
     device: Device;
   }>([
     {
-      type: 'list',
+      type: 'select',
       name: 'device',
       message: 'Found multiple devices, please choose one',
       choices: devices.map(device => ({
@@ -169,7 +169,7 @@ async function syncFavorites(client: DeviceClient) {
       action: SyncOption;
     }>([
       {
-        type: 'list',
+        type: 'select',
         name: 'action',
         message: 'What would you like to do with these favorites?',
         choices: [
@@ -208,7 +208,7 @@ async function syncFavorites(client: DeviceClient) {
       action: SyncOption;
     }>([
       {
-        type: 'list',
+        type: 'select',
         name: 'action',
         message: 'What would you like to do with these favorites?',
         choices: [
@@ -271,7 +271,7 @@ async function syncPlaylists(client: DeviceClient) {
       action: SyncOption;
     }>([
       {
-        type: 'list',
+        type: 'select',
         name: 'action',
         message: 'What would you like to do with these playlists?',
         choices: [
@@ -315,7 +315,7 @@ async function syncPlaylists(client: DeviceClient) {
       action: SyncOption;
     }>([
       {
-        type: 'list',
+        type: 'select',
         name: 'action',
         message: 'What would you like to do with these playlists?',
         choices: [
@@ -371,7 +371,7 @@ async function syncSongs(client: DeviceClient) {
       action: SyncOption;
     }>([
       {
-        type: 'list',
+        type: 'select',
         name: 'action',
         message: 'What would you like to do with these songs?',
         choices: [
@@ -409,7 +409,7 @@ async function syncSongs(client: DeviceClient) {
       action: SyncOption;
     }>([
       {
-        type: 'list',
+        type: 'select',
         name: 'action',
         message: 'What would you like to do with these songs?',
         choices: [

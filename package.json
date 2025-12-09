@@ -6,6 +6,9 @@
   "repository": "D3SOX/beatsaber-quest-pcvr-sync",
   "author": "D3SOX",
   "license": "GPL-3.0-or-later",
+  "engines": {
+    "node": ">=20.12.0"
+  },
   "type": "module",
   "scripts": {
     "dev": "tsx --watch .",
@@ -13,7 +16,6 @@
     "lint": "eslint --ignore-path .gitignore --ext .ts src"
   },
   "devDependencies": {
-    "@types/inquirer": "^9.0.9",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^8.57.1",
@@ -26,7 +28,7 @@
   "dependencies": {
     "@u4/adbkit": "^5.1.7",
     "chalk": "^5.6.2",
-    "inquirer": "^10.2.2",
+    "inquirer": "^13.0.0",
     "tar": "^7.5.2"
   }
 }
