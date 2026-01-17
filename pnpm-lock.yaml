@@ -18,8 +18,8 @@ importers:
         specifier: ^13.1.0
         version: 13.1.0(@types/node@24.10.2)
       tar:
-        specifier: ^7.5.2
-        version: 7.5.2
+        specifier: ^7.5.3
+        version: 7.5.3
     devDependencies:
       '@typescript-eslint/eslint-plugin':
         specifier: ^5.62.0
@@ -1040,8 +1040,8 @@ packages:
     resolution: {integrity: sha512-MeQTA1r0litLUf0Rp/iisCaL8761lKAZHaimlbGK4j0HysC4PLfqygQj9srcs0m2RdtDYnF8UuYyKpbjHYp7Jw==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  tar@7.5.2:
-    resolution: {integrity: sha512-7NyxrTE4Anh8km8iEy7o0QYPs+0JKBTj5ZaqHg6B39erLg0qYXN3BijtShwbsNSvQ+LN75+KV+C4QR/f6Gwnpg==}
+  tar@7.5.3:
+    resolution: {integrity: sha512-ENg5JUHUm2rDD7IvKNFGzyElLXNjachNLp6RaGf4+JOgxXHkqA+gq81ZAMCUmtMtqBsoU62lcp6S27g1LCYGGQ==}
     engines: {node: '>=18'}
 
   text-table@0.2.0:
@@ -2028,7 +2028,7 @@ snapshots:
     dependencies:
       '@pkgr/core': 0.2.9
 
-  tar@7.5.2:
+  tar@7.5.3:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0
