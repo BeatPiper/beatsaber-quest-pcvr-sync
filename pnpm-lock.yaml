@@ -15,8 +15,8 @@ importers:
         specifier: ^5.6.2
         version: 5.6.2
       inquirer:
-        specifier: ^13.2.4
-        version: 13.2.4(@types/node@24.10.2)
+        specifier: ^13.2.5
+        version: 13.2.5(@types/node@24.10.2)
       tar:
         specifier: ^7.5.9
         version: 7.5.9
@@ -791,8 +791,8 @@ packages:
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
-  inquirer@13.2.4:
-    resolution: {integrity: sha512-7JJ8+lGhGtJOeVnrH4IqP7mQgOqvHkKS6DNLTkMHEI3iHKzZUaidOivU9q8wrlSRvT0ISCBMweMK7TWYzr5BhA==}
+  inquirer@13.2.5:
+    resolution: {integrity: sha512-JHvVPgOIre0NrA9o8BGHUBh9rNuKkN1gS1ffbYgy3BuuJmJZhnFy9IHz3pcNbZm9zK6qTYvQ6LN5wl3Xcg4Jkw==}
     engines: {node: '>=23.5.0 || ^22.13.0 || ^21.7.0 || ^20.12.0'}
     peerDependencies:
       '@types/node': '>=18'
@@ -1805,7 +1805,7 @@ snapshots:
 
   inherits@2.0.4: {}
 
-  inquirer@13.2.4(@types/node@24.10.2):
+  inquirer@13.2.5(@types/node@24.10.2):
     dependencies:
       '@inquirer/ansi': 2.0.3
       '@inquirer/core': 11.1.5(@types/node@24.10.2)
