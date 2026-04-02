@@ -10,7 +10,7 @@ import crypto from 'crypto';
 import { sleep } from '../utils';
 import os from 'os';
 
-const getSongFiles = (items: fs.Dirent[]) =>
+const getSongFiles = (items: { isDirectory(): boolean; name: string }[]) =>
   items.filter(item => item.isDirectory()).map(({ name }) => name);
 
 function getPcInfoFile(songFolder: string): string | null {

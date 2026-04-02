@@ -1,7 +1,7 @@
 import Adb, { DeviceClient } from '@u4/adbkit';
+import type { Device } from '@u4/adbkit';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import Device from '@u4/adbkit/dist/models/Device';
 import { updateCustomConfigPath, updateCustomGamePath } from './settings';
 import { SyncOption } from './types';
 import {
