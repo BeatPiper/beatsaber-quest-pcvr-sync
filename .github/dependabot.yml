@@ -1,16 +1,12 @@
 version: 2
 updates:
-  # Fetch and update latest `npm` packages
-  - package-ecosystem: npm
+  # Fetch and update latest `bun` packages
+  - package-ecosystem: bun
     directory: '/'
     schedule:
       interval: daily
       time: '00:00'
     open-pull-requests-limit: 10
-    reviewers:
-      - d3sox
-    assignees:
-      - d3sox
     commit-message:
       prefix: fix
       prefix-development: chore
@@ -24,10 +20,6 @@ updates:
       interval: daily
       time: '00:00'
     open-pull-requests-limit: 10
-    reviewers:
-      - d3sox
-    assignees:
-      - d3sox
     commit-message:
       prefix: fix
       prefix-development: chore

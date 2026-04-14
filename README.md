@@ -12,7 +12,7 @@ I wanted to be able to sync my maps/playlists/favorites with a click of a button
 1. Clone the repo  
    `git clone https://github.com/D3SOX/beatsaber-quest-pcvr-sync.git`
 2. Install dependencies  
-   `pnpm install`
+   `bun install`
 3. Start the app  
-   `pnpm start`
+   `bun start`
 4. Follow the instructions

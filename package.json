@@ -11,8 +11,8 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "tsx --watch .",
-    "start": "tsx .",
+    "dev": "bun run --watch .",
+    "start": "bun run .",
     "lint": "eslint src"
   },
   "devDependencies": {
@@ -22,14 +22,11 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "prettier": "^3.8.2",
-    "tsx": "^4.21.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2"
   },
-  "pnpm": {
-    "overrides": {
-      "@xmldom/xmldom": ">=0.9.9"
-    }
+  "overrides": {
+    "@xmldom/xmldom": ">=0.9.9"
   },
   "dependencies": {
     "@u4/adbkit": "^5.1.7",
