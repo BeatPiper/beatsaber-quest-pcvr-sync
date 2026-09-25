@@ -17,13 +17,13 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/node": "^26.4.1",
+    "@types/node": "^26.6.1",
     "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.8",
     "typescript": "~6.0.2",
-    "typescript-eslint": "^8.69.0"
+    "typescript-eslint": "^8.70.0"
   },
   "overrides": {
     "@xmldom/xmldom": ">=0.9.10",
@@ -32,7 +32,7 @@
   "dependencies": {
     "@u4/adbkit": "^5.1.7",
     "chalk": "^6.0.0",
-    "inquirer": "^14.2.1",
+    "inquirer": "^14.2.2",
     "tar": "^7.5.22"
   }
 }
