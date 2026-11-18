@@ -32,7 +32,7 @@
   "dependencies": {
     "@u4/adbkit": "^5.2.1",
     "chalk": "^6.0.1",
-    "inquirer": "^14.2.5",
+    "inquirer": "^14.3.0",
     "tar": "^7.5.22"
   }
 }
